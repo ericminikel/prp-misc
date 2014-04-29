@@ -118,7 +118,7 @@ text(c(mean(sp),mean(opr),mean(b1),mean(h1),mean(b2),
               expression(paste(alpha,2)),
               expression(paste(alpha,3)),
               "GPI"))
-text(c(260,280,300)+rep(15,3),c(20,20,20),labels=c('Accepts','Produces','Other'),srt=90,cex=.8,pos=3)
+text(c(260,280,300)+rep(15,3),c(20,20,20),labels=c('Produces','Accepts','Other'),srt=90,cex=.8,pos=3)
 for (row in 1:dim(prps)[1]) {
     deleted = evals(prps$deleted[row])
     present = (1:253)[-deleted]
