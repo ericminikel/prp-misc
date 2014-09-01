@@ -67,11 +67,13 @@ prps = data.frame(name=character(), # name of mutant
                   cite=character()) # citation
 prps["wt",] = c("'Wild-type'",0,"254","no","yes","no","") # 254 is an ugly hack to get wild-type to plot properly
 prps["Y145X",] = c("'Y145X'",0,"145:253","yes","","","Kitamoto 1993")
+prps["Q160X",] = c("'Q160X'",0,"160:253","yes","","","Jayadev 2011")
 prps["Y163X",] = c("'Y163X'",0,"163:253","yes","","","Mead 2013")
 prps["D178fs25X",] = c("'D178fs25X'",0,"178:253","yes","","","Matsuzono 2013")
 prps["Y226X-Q227X",] = c("'Y226X, Q227X'",0,"226:253","yes","","","Jansen 2009")
 prps["2-OPRD",] = c("'2-OPRD'",0,"80:91","","","","?")
 prps["OPRI",] = c("'OPRI (various)'",0,"254","yes","","yes?","various")
+prps["insLGGLGGYV",] = c("'insLGGLGGYV'",0,"254","yes","","","Hinnell 2011")
 prps["G29X",] = c("'Goat 32Stop (G29X)'",0,"29:253","no","","","Benestad 2012")
 prps["PrPdNterm",] = c("expression(paste(Delta,'Nterm / ',Delta,'A /',Delta,'32-80'))",0,"32:81","no","yes","no","Fischer 1996")
 prps["PrPdNco",] = c("expression(paste(Delta,'Nco / ',Delta,'B /',Delta,'69-84'))",0,"70:85","no","yes","no","Fischer 1996")
@@ -103,7 +105,7 @@ prps["delGPI",] = c("expression(paste(Delta,'GPI'))",0,"231:253","yes","yes","no
 prps$height = seq(20/dim(prps)[1],20,20/dim(prps)[1])
 increment = 20/dim(prps)[1]
 
-png('prp-deletion-mutants.jpg',width=600,height=1200,res=300,pointsize=3)
+png('prp-deletion-mutants.png',width=600,height=1200,res=300,pointsize=3)
 par(mar=c(0,0,0,0))
 plot(NA,NA,xaxt='n',yaxt='n',xlim=c(-100,320),ylim=c(0,20),xlab='',ylab='')
 axis(side=1,at=c(1,23,50,100,150,200,230,253),
@@ -141,6 +143,10 @@ for (row in 1:dim(prps)[1]) {
       insertedrange = 91:(91+9*8)
       points(insertedrange,rep(ht+increment/3,length(insertedrange)),pch=15,col=ocolor,cex=1)
       points(91,ht+increment/3,pch=17,col='black')
+    } else if (rownames(prps)[row] == "insLGGLGGYV") {
+      insertedrange = 129:(129+8)
+      points(insertedrange,rep(ht+increment/3,length(insertedrange)),pch=15,col=bcolor,cex=1)
+      points(129,ht+increment/3,pch=17,col='black')
     } else if (rownames(prps)[row] == "D178fs25X") {
       points(178:(178+25-1),rep(ht,25),pch=aapch,col=delcolor,cex=2.2)
     }
@@ -168,8 +174,12 @@ for (row in 1:dim(prps)[1]) {
     points((179+214)/2,ht-increment/3,pch=4,col=dscolor,cex=2)
   } else if (rownames(prps)[row] == "OPRI") {
     insertedrange = 91:(91+9*8)
-    points(insertedrange,rep(ht+increment/2.5,length(insertedrange)),pch=15,col=ocolor,cex=1)
+    points(insertedrange,rep(ht+increment/2.5,length(insertedrange)),pch=15,col=bcolor,cex=1)
     points(91,ht+increment/2.5,pch=17,col='black')
+  } else if (rownames(prps)[row] == "insLGGLGGYV") {
+    insertedrange = 129:(129+8)
+    points(insertedrange,rep(ht+increment/3,length(insertedrange)),pch=15,col=rest,cex=1)
+    points(129,ht+increment/3,pch=17,col='black')
   } else if (rownames(prps)[row] == "D178fs25X") {
     points(178:(178+25-1),rep(ht,25),pch=aapch,col=delcolor,cex=5)
   }
