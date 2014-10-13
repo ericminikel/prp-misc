@@ -28,8 +28,8 @@ data$color[data$treatment=='pentosan polysulfate'] = '#DB70DB'
 data$color[data$treatment=='anle138b'] = '#39B7CD'
 data$color[data$treatment=='IND24'] = '#59D7ED'
 data$color[data$treatment=='cpd-b'] = '#79F7FD'
-data$color[data$treatment=='Tet-off'] = '#FFD700'
-data$color[data$treatment=='Cre-MloxP'] = '#FFF720'
+data$color[data$treatment=='Tet-off'] = '#222222'
+data$color[data$treatment=='Cre-MloxP'] = '#000000'
 data$color[data$treatment=='LV-siRNA'] = '#7B3F00'
 data$color[data$treatment=='AAV2-siRNA'] = '#9B5F20'
 data$color[data$treatment=='ASO 771'] = '#AB7F40'
@@ -39,10 +39,10 @@ data$pch = 20
 data$delay[data$treatment=='Cre-MloxP'] = 2.4
 data$pch[data$treatment=='Cre-MloxP'] = 17
 
-
-i =2
+i=4
 # add in the treatment classes one by one
 for (i in 1:4) {
+    pdf(paste('timepoint-delay-',i,'.pdf',sep=''),width=8,height=6)
     classes_to_plot = unique(data$class)[1:i]
     par(mar=c(4,5,3,2))
     plot(NA,NA,xlim=c(0,1),ylim=c(-.2,2.5),axes=FALSE,xaxs='i',yaxs='i',
@@ -53,11 +53,16 @@ for (i in 1:4) {
     abline(v=0,col='#777777')
     axis(side=1,at=(0:10)/10,labels=(0:10)/10,lwd=0,lwd.ticks=1)
     axis(side=2,at=(0:5),labels=paste((0:5)*100,'%',sep=''),lwd=0,lwd.ticks=1,las=1)
+    if (i >= 3) {
+        highlights = data$class == 'genetic manipulation'
+        points(data$timepoint[highlights],data$delay[highlights],col='#FFD700',pch=data$pch[highlights],cex=2.5)
+    }
     for (tmt in unique(data$treatment[data$class %in% classes_to_plot])) {
         subset = data$treatment==tmt
         points(data$timepoint[subset],data$delay[subset],type='b',lwd=5,col=data$color[subset],pch=data$pch[subset])
         text(x=data$timepoint[subset][1]+.01,y=data$delay[subset][1],label=tmt,pos=4,col=unique(data$color[subset]))
     }
+    dev.off()
 }
 
 
