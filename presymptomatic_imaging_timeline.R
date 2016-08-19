@@ -7,7 +7,7 @@ lncol='#333333'
 
 png('figures/imaging_case_reports.png',width=800,height=400,res=85)
 par(mar=c(3,10,3,1))
-plot(NA,NA,xlim=c(-67,24),ylim=c(.5,8.5),xaxs='i',yaxs='i',axes=FALSE,ann=FALSE)
+plot(NA,NA,xlim=c(-67,18),ylim=c(.5,8.5),xaxs='i',yaxs='i',axes=FALSE,ann=FALSE)
 rect(xleft=-67,xright=0,ybottom=0,ytop=9,col='#FFFFFF',border=NA)
 rect(xleft=0,xright=24,ybottom=0,ytop=9,col='#CCCCCC',border=NA)
 abline(v=0, lty=3, lwd=6, col='#000000')
