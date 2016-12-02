@@ -46,8 +46,7 @@ data$color[data$compound=='anle138b'] = k_anle138b
 data$color[data$compound=='cpd-b'] = k_cpdb
 data$color[data$compound=='PPS'] = k_pps
 
-for (compound in unique(data$compound)) {
-pdf(paste('figures/timepoint_delay_simplified',compound,'.pdf',sep=''),width=8, height=4.5)
+pdf('figures/timepoint_delay_simplified.pdf',width=8, height=4.5)
 par(mar=c(4,5,4,4)) 
 plot(NA, NA, xlab='', ylab='', xlim=c(-.15,1), ylim=c(0,3.5), yaxs='i', axes=FALSE)
 abline(h=0, lwd=2, col='#000000')
@@ -55,11 +54,10 @@ abline(h=1:3, lwd=.5, col='#888888')
 abline(v=0, lwd=1, col='#000000')
 axis(side=1, at=(-1:10)/10, labels=percent((-1:10)/10), lwd=0, lwd.ticks=1, cex.axis=1)
 axis(side=2, at=(0:6)/2, labels=paste((0:6)/2+1,'x',sep=''), lwd=0, lwd.ticks=.5, cex.axis=.9, las=2)
-
+for (compound in c('anle138b','cpd-b','PPS','IND24')) {
   points(data$timepoint[data$compound==compound], data$delay[data$compound==compound], type='b', lwd=3, pch=20, col=data$color[data$compound==compound], cex=2)
-
+}
 mtext(side=1, text='Timepoint when continuous treatment initiated', font=2, line=2.5, cex=.9)
 mtext(side=2, text='Survival time relative to controls', font=2, line=3.5, cex=.9)
 title('Time of intervention versus survival outcome for antiprion compounds', cex=.9)
 dev.off()
-}
