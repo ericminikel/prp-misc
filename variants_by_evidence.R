@@ -112,3 +112,15 @@ for (j in 1:nmut) {
 legend(x=3.5,xjust=1,y=1,legend=classifications$display,col=classifications$col,text.col=classifications$col,pch=15,cex=2,title='literature annotation',title.col='black')
 legend(x=3.5,xjust=1,y=25,legend=cex_vals$display,pt.cex=cex_vals$cex,pch=20,col='black',title='prevalence in cases',cex=2)
 dev.off()
+
+
+
+
+# number of hp missense
+sum(muts$classification=='high' & !grepl('(X|OPR|ins)',muts$variant))
+muts$variant[muts$classification=='high' & !grepl('(X|OPR|ins)',muts$variant)]
+muts$residue[muts$classification=='high' & !grepl('(X|OPR|ins)',muts$variant)]
+
+
+cat(paste(muts$variant[muts$classification=='high' & !grepl('(X|OPR|ins)',muts$variant)],collapse=', '))
+cat(paste(muts$residue[muts$classification=='high' & !grepl('(X|OPR|ins)',muts$variant)],collapse='+'))
